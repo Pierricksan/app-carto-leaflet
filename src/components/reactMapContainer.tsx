@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import {
@@ -11,6 +11,7 @@ import {
 } from "react-leaflet";
 import LocationMarker from "./locationMarker";
 import MapsButton from "./mapsButton";
+import { MapContext } from "./MapContext";
 
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
@@ -19,6 +20,8 @@ L.Icon.Default.mergeOptions({
 });
 
 const ReactMapContainer = () => {
+  const { markPosition } = useContext(MapContext);
+
   return (
     <>
       <MapContainer
@@ -38,6 +41,7 @@ const ReactMapContainer = () => {
             [49, 1.9],
           ]}
         ></Polyline>
+        <Marker position={markPosition}></Marker>
       </MapContainer>
       <MapsButton>Autre button</MapsButton>
     </>
